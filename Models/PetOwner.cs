@@ -9,14 +9,15 @@ namespace pet_hotel
     {
         public int id { get; set; }
 
+        [EmailAddress]
         [Required]
         public string emailAddress { get; set; }
 
         [Required]
-        [EmailAddress]
+
         public string name { get; set; }
 
         [NotMapped]
-        public int petCount { get; set;}
+        public int petCount { get; set; }
     }
 }
