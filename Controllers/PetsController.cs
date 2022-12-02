@@ -37,6 +37,35 @@ namespace pet_hotel.Controllers
 
             _context.SaveChanges();
         }
+
+
+        [HttpPut("{id}/checkin")]
+        public Pet Put(int id)
+        {
+            Pet pet = _context.Pets.Find(id);
+
+            pet.checkedInAt = DateTime.Now;
+
+            _context.Update(pet);
+
+            _context.SaveChanges();
+
+            return pet;
+        }
+
+        [HttpPut("{id}/checkout")]
+        public Pet put(int id)
+        {
+            Pet pet = _context.Pets.Find(id);
+
+            pet.checkedInAt = null;
+
+            _context.SaveChanges();
+
+            return pet;
+        }
+        // [Route("/checkout")]
+
         // [HttpGet]
         // [Route("test")]
         // public IEnumerable<Pet> GetPets() {
