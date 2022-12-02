@@ -29,6 +29,46 @@ namespace pet_hotel.Controllers
                 .Include(pet => pet.petOwner);
         }
 
+
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            Pet pet = _context.Pets.Find(id);
+            
+            _context.Pets.Remove(pet);
+
+            _context.SaveChanges();
+        }
+
+
+        [HttpPut("{id}/checkin")]
+        public Pet Put(int id)
+        {
+            Pet pet = _context.Pets.Find(id);
+
+            pet.checkedInAt = DateTime.Now;
+
+            _context.Update(pet);
+
+            _context.SaveChanges();
+
+            return pet;
+        }
+
+        [HttpPut("{id}/checkout")]
+        public Pet put(int id)
+        {
+            Pet pet = _context.Pets.Find(id);
+
+            pet.checkedInAt = null;
+
+            _context.SaveChanges();
+
+            return pet;
+        }
+        // [Route("/checkout")]
+
+
         [HttpPost]
         public IActionResult AddPet(Pet pet)
         {
@@ -38,6 +78,7 @@ namespace pet_hotel.Controllers
 
             return CreatedAtAction(nameof(AddPet),new { id = pet.id},pet);
         }
+
         // [HttpGet]
         // [Route("test")]
         // public IEnumerable<Pet> GetPets() {
